@@ -54,7 +54,7 @@
      */
     function onFilter(event) {
         const element = event.target;
-
+        clearForm();
         if (state.isLoading) {
             return false;
         }
@@ -80,6 +80,7 @@
      */
     function onSort(event) {
         const element = event.target;
+        clearForm();
         if (state.isLoading === false) {
             let newSort = null;
             switch (element.dataset.id) {
@@ -177,6 +178,10 @@
                 updateList(data);
                 state.isLoading = false;
             });
+    }
+
+    function clearForm() {
+        searchFormEl.elements[0].value = '';
     }
 
     function addLeadingZero(num) {
