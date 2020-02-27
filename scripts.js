@@ -177,6 +177,9 @@
                 state.movies = data;
                 updateList(data);
                 state.isLoading = false;
+            })
+            .catch(error => {
+                updateList(null, error);
             });
     }
 
@@ -217,6 +220,9 @@
                 state.movies = data;
                 updateList(data);
                 state.isLoading = false;
+            })
+            .catch(error => {
+                updateList(null, error);
             });
     }
 
@@ -224,7 +230,11 @@
      * Update the movies list after searching or sorting
      * @param data
      */
-    function updateList(data) {
+    function updateList(data, error) {
+        if (error) {
+            moviesListEl.innerHTML = '<h1>Sorry! Something was broken</h1>';
+            return false;
+        }
         moviesCountEl.innerHTML = `Showing ${data.results.length} of a total of ${data.total_results} movies`;
         if (data.results.length) {
             moviesListEl.innerHTML = data.results.map(result => {
