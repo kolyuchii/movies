@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>The Movie DB</title>
+</head>
+<body>
+    <div class="logo">
+        <a href="/">
+            <img class="logo__image" src="https://www.themoviedb.org/assets/1/v4/logos/primary-green-d70eebe18a5eb5b166d5c1ef0796715b8d1a2cbc698f96d311d62f894ae87085.svg">
+        </a>
+    </div>
+    <header class="header">
+        <div class="header__name">THE MOVIE DB</div>
+        <h1 class="header__title">Find any movie</h1>
+        <form class="js-search-form">
+            <span class="header__input-wrapper">
+                <input class="header__input" type="text" placeholder="Search movies...">
+            </span>
+        </form>
+    </header>
+
+    <section class="content">
+        <header class="content__header">
+            <div>
+                <h1 class="content__header_title js-content-title">All movies</h1>
+                <div class="content__header_counter js-movies-count"></div>
+            </div>
+            <div class="sorting">
+                <div class="dropdown">
+                    <div class="dropdown__value js-dropdown">No sorting</div>
+                    <ul class="dropdown__list js-dropdown-list js-sorting">
+                        <li class="dropdown__list-item" data-id="all">No sorting</li>
+                        <li class="dropdown__list-item" data-id="desc">Highest rating</li>
+                    </ul>
+                </div>
+
+                <div class="dropdown">
+                    <div class="dropdown__value js-dropdown">All movies</div>
+                    <ul class="dropdown__list js-dropdown-list js-filtering">
+                        <li class="dropdown__list-item" data-id="all">All movies</li>
+                        <li class="dropdown__list-item" data-id="new">New movies</li>
+                        <li class="dropdown__list-item" data-id="fav">Favourites</li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="js-movies-list">
+            <h1>Loading...</h1>
+        </div>
+    </section>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

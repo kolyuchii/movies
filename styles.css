@@ -1,0 +1,209 @@
+@import 'https://www.themoviedb.org/assets/2/glyphicons-regular-eedc7581ecfd9bb57b1af16ad7ad4428aa147de4f08e01f49a768c801a29de84.woff2';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: grid;
+    grid-template-columns: auto minmax(300px, 900px) auto;
+    grid-template-rows: 80px 230px auto;
+    justify-items: stretch;
+    min-width: 300px;
+    background-color: #23323D;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+
+.logo {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    background-color: #091C24;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    .logo__image {
+        height: 50px;
+    }
+
+.header {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    text-align: center;
+    padding: 40px 0 0;
+}
+    .header__name {
+        font-size: 12px;
+        color: #858D93;
+        font-weight: 100;
+    }
+    .header__title {
+        font-weight: 100;
+        margin-bottom: 30px;
+    }
+    .header__input {
+        background-color: #fff;
+        border-radius: 30px;
+        border: none;
+        font-size: 1em;
+        outline: none;
+        padding: 20px 70px 20px 20px;
+        width: 300px;
+    }
+    .header__input-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+    .header__input-wrapper:after {
+        background-image: url('./images/search.svg');
+        content: "";
+        position: absolute;
+        right: 16px;
+        height: 100%;
+        width: 24px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+.content {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    margin-bottom: 50px;
+}
+    .content__header {
+        border-bottom: 1px solid #35424C;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+        .content__header_title {
+            font-weight: 100;
+            margin-bottom: 3px;
+        }
+        .content__header_counter {
+            font-size: 12px;
+            color: #8B9399;
+        }
+    .sorting {
+        display: flex;
+        justify-content: space-between;
+    }
+
+.movie {
+    background-color: #2B3A44;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 100px auto 180px;
+    grid-template-rows: auto;
+    grid-template-areas: "image info controls";
+    grid-column-gap: 20px;
+    position: relative;
+    overflow: hidden;
+}
+    .movie__badge {
+        border-radius: 3px;
+        padding: 5px;
+        background-color: #18A963;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        opacity: 0.8;
+    }
+    .movie__image {
+        grid-area: image;
+        width: 100%;
+    }
+    .movie__info {
+        grid-area: info;
+        margin: 20px 0;
+        border-right: 1px solid #3C4A53;
+        padding-right: 20px;
+        font-size: 12px;
+        color: #C2C6C9;
+    }
+        .movie__info-header {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #A8AFB3;
+            font-weight: 100;
+        }
+            .movie__info-header_link {
+                color: #fff;
+                text-decoration: none;
+            }
+    .movie__controls {
+        grid-area: controls;
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+.button {
+    background-color: #18A963;
+    color: #fff;
+    padding: 6px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 12px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+    .button.button-secondary {
+        background-color: #33404A;
+    }
+.icon-hart {
+    width: 18px;
+    display: inline-block;
+    height: 15px;
+}
+.icon {
+    filter: invert(40%) sepia(15%) saturate(368%) hue-rotate(163deg) brightness(92%) contrast(84%);
+}
+.icon.is-favourite {
+    filter: invert(47%) sepia(12%) saturate(5150%) hue-rotate(113deg) brightness(98%) contrast(81%);
+}
+
+.dropdown {
+    position: relative;
+    margin-left: 10px;
+    font-size: 12px;
+}
+    .dropdown__value {
+        background-color: #18A963;
+        padding: 10px 30px 10px 15px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    .dropdown__list {
+        background-color: #18A963;
+        position: absolute;
+        list-style: none;
+        right: 0;
+        top: 30px;
+        border-radius: 3px;
+        overflow: hidden;
+        display: none;
+        z-index: 1000;
+    }
+    .dropdown__list.is-active {
+        display: block;
+    }
+        .dropdown__list-item {
+            min-width: 150px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .dropdown__list-item:hover {
+            background-color: #159B5B;
+        }
