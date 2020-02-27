@@ -2,6 +2,7 @@
     // initial state
     const BASE_API_URL = 'https://api.themoviedb.org/3';
     const API_KEY = '2a2111f54cf7e12fd1580ff34ebc37fd';
+    const MOVIE_BASE_URL = 'https://www.themoviedb.org/movie';
 
     const state = {
         filterType: 'all',
@@ -80,17 +81,23 @@
     function onSort(event) {
         const element = event.target;
         if (state.isLoading === false) {
+            let newSort = null;
             switch (element.dataset.id) {
-                case 'desc':
-                    state.sort = 'popularity.desc';
+                case 'top':
+                    newSort = 'popularity.desc';
                     break;
                 case 'new':
-                    state.sort = 'release_date.desc';
+                    newSort = 'release_date.desc';
                     break;
                 default:
-                    state.sort = 'popularity.asc';
+                    newSort = 'vote_average.desc';
             }
-            getList();
+
+            // do not update if the same value was selected
+            if (newSort !== state.sort) {
+                state.sort = newSort;
+                getList();
+            }
         }
     }
 
@@ -176,7 +183,7 @@
         return `0${num}`.substr(-2);
     }
     function getDate() {
-        const date = new Date().getTime() - 3 * 30 * 24 * 60 * 60 * 1000;
+        const date = new Date().getTime() - 3 * 30 * 24 * 60 * 60 * 1000; // 3 months ago
         const newDate = new Date(date);
         const month = addLeadingZero(newDate.getMonth() + 1);
         const day = addLeadingZero(newDate.getDay());
@@ -216,18 +223,14 @@
         moviesCountEl.innerHTML = `Showing ${data.results.length} of a total of ${data.total_results} movies`;
         if (data.results.length) {
             moviesListEl.innerHTML = data.results.map(result => {
-                let year = (result.release_date || '').split('-')[0];
-                if (year) {
-                    year = `(${year})`;
-                }
-                const moviePage = `https://www.themoviedb.org/movie/${result.id}`;
+                const moviePage = `${MOVIE_BASE_URL}/${result.id}`;
                 const isFavourite = state.favouriteMovies[result.id] ? 'is-favourite' : '';
                 return `<article class="movie">
                         ${getImage(result.poster_path, result.title)}
                         <div class="movie__badge">${getScore(result.vote_average, result.vote_count)}</div>
                         <div class="movie__info">
                             <h1 class="movie__info-header">
-                                <a class="movie__info-header_link" target="_blank" href="${moviePage}">${result.title}</a> ${year}
+                                <a class="movie__info-header_link" target="_blank" href="${moviePage}">${result.title}</a> ${getReleaseYear(result.release_date)}
                             </h1>
                             ${result.overview}
                         </div>
@@ -244,6 +247,20 @@
         }
     }
 
+    function getReleaseYear(releaseDate) {
+        let year = (releaseDate || '').split('-')[0];
+        if (year) {
+            year = `(${year})`;
+        }
+        return year;
+    }
+
+    /**
+     * That's my version of score )))
+     * @param vote_average
+     * @param vote_count
+     * @returns {number}
+     */
     function getScore(vote_average, vote_count) {
         const m = 250;
         const C = 6;
