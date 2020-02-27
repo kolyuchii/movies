@@ -68,21 +68,28 @@
                 results: movies,
                 total_results: state.movies.total_results,
             });
-        } else if (state.filterType === 'new') {
-            getList();
         } else {
             updateList(state.movies);
         }
     }
 
     /**
-     * Sort items by popularity
+     * Sort items by popularity or by release date
      * @param event
      */
     function onSort(event) {
         const element = event.target;
         if (state.isLoading === false) {
-            state.sort = element.dataset.id === 'desc' ? 'popularity.desc' : 'popularity.asc';
+            switch (element.dataset.id) {
+                case 'desc':
+                    state.sort = 'popularity.desc';
+                    break;
+                case 'new':
+                    state.sort = 'release_date.desc';
+                    break;
+                default:
+                    state.sort = 'popularity.asc';
+            }
             getList();
         }
     }
